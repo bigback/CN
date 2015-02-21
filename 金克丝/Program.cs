@@ -68,25 +68,25 @@ namespace Jinx
             SpellList.Add(R);
             SpellList.Add(R1);
             Config = new Menu(ChampionName, ChampionName, true);
-            var targetSelectorMenu = new Menu("Target Selector", "Target Selector");
+            var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
             Config.AddSubMenu(targetSelectorMenu);
-            Config.AddSubMenu(new Menu("Orbwalking", "Orbwalking"));
+            Config.AddSubMenu(new Menu("走砍", "Orbwalking"));
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
             Config.AddToMainMenu();
             #region E
-                Config.SubMenu("E Config").AddItem(new MenuItem("autoE", "Auto E in Combo BETA").SetValue(true));
-                Config.SubMenu("E Config").AddItem(new MenuItem("AGC", "AntiGapcloserE").SetValue(true));
+                Config.SubMenu("E Config").AddItem(new MenuItem("autoE", "连招自动E(测试)").SetValue(true));
+                Config.SubMenu("E Config").AddItem(new MenuItem("AGC", "使用E反突进").SetValue(true));
                 Config.SubMenu("E Config").AddItem(new MenuItem("opsE", "OnProcessSpellCastE").SetValue(true));
             #endregion
             #region R
-                Config.SubMenu("R Config").AddItem(new MenuItem("autoR", "Auto R").SetValue(true));
-                Config.SubMenu("R Config").AddItem(new MenuItem("hitchanceR", "VeryHighHitChanceR").SetValue(true));
-                Config.SubMenu("R Config").AddItem(new MenuItem("useR", "Semi-manual cast R key").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
+                Config.SubMenu("R Config").AddItem(new MenuItem("autoR", "自动 R").SetValue(true));
+                Config.SubMenu("R Config").AddItem(new MenuItem("hitchanceR", "R 高命中率").SetValue(true));
+                Config.SubMenu("R Config").AddItem(new MenuItem("useR", "半手动使用R按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
             #endregion
-            Config.AddItem(new MenuItem("noti", "Show notification").SetValue(true));
-            Config.AddItem(new MenuItem("pots", "Use pots").SetValue(true));
-            Config.AddItem(new MenuItem("Hit", "Hit Chance W").SetValue(new Slider(2, 2, 0)));
+            Config.AddItem(new MenuItem("noti", "显示提示").SetValue(true));
+            Config.AddItem(new MenuItem("pots", "使用 pots").SetValue(true));
+            Config.AddItem(new MenuItem("Hit", "W 命中率").SetValue(new Slider(2, 2, 0)));
             Config.AddItem(new MenuItem("debug", "Debug").SetValue(false));
 
             Drawing.OnDraw += Drawing_OnDraw;
@@ -95,7 +95,7 @@ namespace Jinx
             Orbwalking.AfterAttack += afterAttack;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
-            Game.PrintChat("<font color=\"#ff00d8\">J</font>inx full automatic AI ver 2.5.1 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">Loaded</font>");
+            Game.PrintChat("<font color=\"#ff00d8\">J</font>inx full automatic AI ver 2.5.1 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">已载入</font>");
         }
 
         private static void Game_OnGameUpdate(EventArgs args)
