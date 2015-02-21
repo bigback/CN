@@ -485,46 +485,46 @@ namespace LeagueSharp.Common
             {
                 _config = attachToMenu;
                 /* Drawings submenu */
-                var drawings = new Menu("Drawings", "drawings");
+                var drawings = new Menu("显示", "drawings");
                 drawings.AddItem(
-                    new MenuItem("AACircle", "AACircle").SetShared()
+                    new MenuItem("AACircle", "英雄普攻范围").SetShared()
                         .SetValue(new Circle(true, Color.FromArgb(255, 255, 0, 255))));
                 drawings.AddItem(
-                    new MenuItem("AACircle2", "Enemy AA circle").SetShared()
+                    new MenuItem("AACircle2", "敌人普攻范围").SetShared()
                         .SetValue(new Circle(false, Color.FromArgb(255, 255, 0, 255))));
                 drawings.AddItem(
-                    new MenuItem("HoldZone", "HoldZone").SetShared()
+                    new MenuItem("HoldZone", "控制范围").SetShared()
                         .SetValue(new Circle(false, Color.FromArgb(255, 255, 0, 255))));
                 _config.AddSubMenu(drawings);
 
                 /* Misc options */
-                var misc = new Menu("Misc", "Misc");
+                var misc = new Menu("其他", "Misc");
                 misc.AddItem(
-                    new MenuItem("HoldPosRadius", "Hold Position Radius").SetShared().SetValue(new Slider(0, 0, 250)));
-                misc.AddItem(new MenuItem("PriorizeFarm", "Priorize farm over harass").SetShared().SetValue(true));
+                    new MenuItem("HoldPosRadius", "保持半径位置").SetShared().SetValue(new Slider(0, 0, 250)));
+                misc.AddItem(new MenuItem("PriorizeFarm", "优先补兵").SetShared().SetValue(true));
                 _config.AddSubMenu(misc);
 
 
                 /* Delay sliders */
                 _config.AddItem(
-                    new MenuItem("ExtraWindup", "Extra windup time").SetShared().SetValue(new Slider(80, 0, 200)));
-                _config.AddItem(new MenuItem("FarmDelay", "Farm delay").SetShared().SetValue(new Slider(0, 0, 200)));
+                    new MenuItem("ExtraWindup", "终结时间").SetShared().SetValue(new Slider(80, 0, 200)));
+                _config.AddItem(new MenuItem("FarmDelay", "补兵延迟").SetShared().SetValue(new Slider(0, 0, 200)));
                 _config.AddItem(
-                    new MenuItem("MovementDelay", "Movement delay").SetShared().SetValue(new Slider(80, 0, 250)))
+                    new MenuItem("MovementDelay", "动作延迟").SetShared().SetValue(new Slider(80, 0, 250)))
                     .ValueChanged += (sender, args) => SetMovementDelay(args.GetNewValue<Slider>().Value);
 
 
                 /*Load the menu*/
                 _config.AddItem(
-                    new MenuItem("LastHit", "Last hit").SetShared().SetValue(new KeyBind('X', KeyBindType.Press)));
+                    new MenuItem("LastHit", "补兵").SetShared().SetValue(new KeyBind('X', KeyBindType.Press)));
 
-                _config.AddItem(new MenuItem("Farm", "Mixed").SetShared().SetValue(new KeyBind('C', KeyBindType.Press)));
-
-                _config.AddItem(
-                    new MenuItem("LaneClear", "LaneClear").SetShared().SetValue(new KeyBind('V', KeyBindType.Press)));
+                _config.AddItem(new MenuItem("Farm", "混合").SetShared().SetValue(new KeyBind('C', KeyBindType.Press)));
 
                 _config.AddItem(
-                    new MenuItem("Orbwalk", "Combo").SetShared().SetValue(new KeyBind(32, KeyBindType.Press)));
+                    new MenuItem("LaneClear", "清线").SetShared().SetValue(new KeyBind('V', KeyBindType.Press)));
+
+                _config.AddItem(
+                    new MenuItem("Orbwalk", "连招").SetShared().SetValue(new KeyBind(32, KeyBindType.Press)));
 
                 _delay = _config.Item("MovementDelay").GetValue<Slider>().Value;
                 Player = ObjectManager.Player;

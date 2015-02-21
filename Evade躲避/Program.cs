@@ -149,7 +149,7 @@ namespace Evade
             //Initialze the collision
             Collision.Init();
 
-            Game.PrintChat("<font color=\"#00BFFF\">Evade# -</font> <font color=\"#FFFFFF\">Loaded</font>");
+            Game.PrintChat("<font color=\"#00BFFF\">Evade韬查伩 -</font> <font color=\"#FFFFFF\">鍔犺浇鎴愬姛</font>");
 
 
             if (Config.PrintSpellData)

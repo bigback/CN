@@ -75,14 +75,14 @@ namespace Jinx
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
             Config.AddToMainMenu();
             #region E
-                Config.SubMenu("E Config").AddItem(new MenuItem("autoE", "连招自动E(测试)").SetValue(true));
-                Config.SubMenu("E Config").AddItem(new MenuItem("AGC", "使用E反突进").SetValue(true));
-                Config.SubMenu("E Config").AddItem(new MenuItem("opsE", "OnProcessSpellCastE").SetValue(true));
+                Config.SubMenu("E 设置").AddItem(new MenuItem("autoE", "连招自动E(测试)").SetValue(true));
+                Config.SubMenu("E 设置").AddItem(new MenuItem("AGC", "使用E反突进").SetValue(true));
+                Config.SubMenu("E 设置").AddItem(new MenuItem("opsE", "OnProcessSpellCastE").SetValue(true));
             #endregion
             #region R
-                Config.SubMenu("R Config").AddItem(new MenuItem("autoR", "自动 R").SetValue(true));
-                Config.SubMenu("R Config").AddItem(new MenuItem("hitchanceR", "R 高命中率").SetValue(true));
-                Config.SubMenu("R Config").AddItem(new MenuItem("useR", "半手动使用R按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
+                Config.SubMenu("R 设置").AddItem(new MenuItem("autoR", "自动 R").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("hitchanceR", "R 高命中率").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("useR", "半手动使用R按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
             #endregion
             Config.AddItem(new MenuItem("noti", "显示提示").SetValue(true));
             Config.AddItem(new MenuItem("pots", "使用 pots").SetValue(true));
@@ -95,7 +95,7 @@ namespace Jinx
             Orbwalking.AfterAttack += afterAttack;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
-            Game.PrintChat("<font color=\"#ff00d8\">J</font>inx full automatic AI ver 2.5.1 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">已载入</font>");
+            Game.PrintChat("<font color=\"#ff00d8\">J</font>inx full automatic AI ver 2.5.1 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">鍔犺浇鎴愬姛</font>");
         }
 
         private static void Game_OnGameUpdate(EventArgs args)
