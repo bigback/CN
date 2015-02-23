@@ -38,13 +38,13 @@ namespace xSaliceReligionAIO.Champions
 
         private void LoadMenu()
         {
-            var key = new Menu("Key", "Key");
+            var key = new Menu("按键", "Key");
             {
-                key.AddItem(new MenuItem("ComboActive", "Combo!", true).SetValue(new KeyBind(32, KeyBindType.Press)));
-                key.AddItem(new MenuItem("HarassActive", "Harass!", true).SetValue(new KeyBind("C".ToCharArray()[0], KeyBindType.Press)));
-                key.AddItem(new MenuItem("HarassActiveT", "Harass (toggle)!", true).SetValue(new KeyBind("N".ToCharArray()[0], KeyBindType.Toggle)));
-                key.AddItem(new MenuItem("LaneClearActive", "Farm!", true).SetValue(new KeyBind("V".ToCharArray()[0], KeyBindType.Press)));
-                key.AddItem(new MenuItem("Misc_QE_Mouse", "QE to Nearest Target To Mouse", true).SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
+                key.AddItem(new MenuItem("ComboActive", "连招!", true).SetValue(new KeyBind(32, KeyBindType.Press)));
+                key.AddItem(new MenuItem("HarassActive", "消耗!", true).SetValue(new KeyBind("C".ToCharArray()[0], KeyBindType.Press)));
+                key.AddItem(new MenuItem("HarassActiveT", "消耗 (保持)!", true).SetValue(new KeyBind("N".ToCharArray()[0], KeyBindType.Toggle)));
+                key.AddItem(new MenuItem("LaneClearActive", "补兵!", true).SetValue(new KeyBind("V".ToCharArray()[0], KeyBindType.Press)));
+                key.AddItem(new MenuItem("Misc_QE_Mouse", "QE二连离鼠标最近的目标", true).SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
                 key.AddItem(new MenuItem("Misc_QE_Mouse2", "QE to Mouse", true).SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
                 key.AddItem(new MenuItem("forceR", "Force R to best Target", true).SetValue(new KeyBind("R".ToCharArray()[0], KeyBindType.Press)));
                 //key.AddItem(new MenuItem("qAA", "Auto Q AAing target", true).SetValue(new KeyBind("I".ToCharArray()[0], KeyBindType.Toggle)));
