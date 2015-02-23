@@ -77,7 +77,7 @@ namespace Jinx
             #region E
                 Config.SubMenu("E 设置").AddItem(new MenuItem("autoE", "连招自动E(测试)").SetValue(true));
                 Config.SubMenu("E 设置").AddItem(new MenuItem("AGC", "使用E反突进").SetValue(true));
-                Config.SubMenu("E 设置").AddItem(new MenuItem("opsE", "OnProcessSpellCastE").SetValue(true));
+                Config.SubMenu("E 设置").AddItem(new MenuItem("opsE", "施法过程中使用E").SetValue(true));
             #endregion
             #region R
                 Config.SubMenu("R 设置").AddItem(new MenuItem("autoR", "自动 R").SetValue(true));

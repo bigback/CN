@@ -78,30 +78,30 @@ namespace Ezreal
             //Create the menu
             Config = new Menu(ChampionName, ChampionName, true);
 
-            var targetSelectorMenu = new Menu("Target Selector", "Target Selector");
+            var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
             Config.AddSubMenu(targetSelectorMenu);
 
             //Orbwalker submenu
-            Config.AddSubMenu(new Menu("Orbwalking", "Orbwalking"));
+            Config.AddSubMenu(new Menu("走砍", "Orbwalking"));
 
             //Load the orbwalker and add it to the submenu.
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
             Config.AddToMainMenu();
-            Config.AddItem(new MenuItem("noti", "Show notification").SetValue(true));
-            Config.AddItem(new MenuItem("pots", "Use pots").SetValue(true));
-            Config.AddItem(new MenuItem("farmQ", "Farm Q").SetValue(true));
-            Config.AddItem(new MenuItem("autoE", "Auto E").SetValue(true));
+            Config.AddItem(new MenuItem("noti", "显示通知").SetValue(true));
+            Config.AddItem(new MenuItem("pots", "使用pots").SetValue(true));
+            Config.AddItem(new MenuItem("farmQ", "Q补兵").SetValue(true));
+            Config.AddItem(new MenuItem("autoE", "自动E").SetValue(true));
             Config.AddItem(new MenuItem("noob", "Noob KS bronze mode").SetValue(false));
-            Config.AddItem(new MenuItem("Hit", "Hit Chance Skillshot").SetValue(new Slider(2, 2, 0)));
-            Config.AddItem(new MenuItem("AGC", "AntiGapcloserE").SetValue(true));
-            Config.AddItem(new MenuItem("smartE", "SmartCast E key").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
+            Config.AddItem(new MenuItem("Hit", "技能命中率").SetValue(new Slider(2, 2, 0)));
+            Config.AddItem(new MenuItem("AGC", "E反突进").SetValue(true));
+            Config.AddItem(new MenuItem("smartE", "智能E按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
             #region Combo
-                Config.SubMenu("R option").AddItem(new MenuItem("autoR", "Auto R").SetValue(true));
-                Config.SubMenu("R option").AddItem(new MenuItem("Rcc", "R cc").SetValue(true));
-                Config.SubMenu("R option").AddItem(new MenuItem("Raoe", "R aoe").SetValue(true));
-                Config.SubMenu("R option").AddItem(new MenuItem("hitchanceR", "VeryHighHitChanceR").SetValue(true));
-                Config.SubMenu("R option").AddItem(new MenuItem("useR", "Semi-manual cast R key").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
+                Config.SubMenu("R 设置").AddItem(new MenuItem("autoR", "自动 R").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("Rcc", "R cc").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("Raoe", "R aoe").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("hitchanceR", "R 高命中率").SetValue(true));
+                Config.SubMenu("R 设置").AddItem(new MenuItem("useR", "半自动使用R按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
             #endregion
             Config.AddItem(new MenuItem("debug", "Debug").SetValue(false));
             //Add the events we are going to use:
@@ -111,7 +111,7 @@ namespace Ezreal
             Orbwalking.AfterAttack += afterAttack;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
-            Game.PrintChat("<font color=\"#008aff\">E</font>zreal full automatic AI ver 1.9 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">Loaded</font>");
+            Game.PrintChat("<font color=\"#008aff\">E</font>zreal full automatic AI ver 1.9 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">宸茶浇鍏</font>");
         }
 
         public static void farmQ()
