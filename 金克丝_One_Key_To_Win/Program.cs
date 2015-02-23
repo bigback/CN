@@ -68,11 +68,13 @@ namespace Jinx
             SpellList.Add(R);
             SpellList.Add(R1);
             Config = new Menu(ChampionName, ChampionName, true);
+            Config = new Menu("OneKeyToWin_金克丝", "name", true);
             var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
             Config.AddSubMenu(targetSelectorMenu);
             Config.AddSubMenu(new Menu("走砍", "Orbwalking"));
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
+			Config.AddSubMenu(new Menu("后爸爸汉化", "hanhua"));
             Config.AddToMainMenu();
             #region E
                 Config.SubMenu("E 设置").AddItem(new MenuItem("autoE", "连招自动E(测试)").SetValue(true));
@@ -87,7 +89,7 @@ namespace Jinx
             Config.AddItem(new MenuItem("noti", "显示提示").SetValue(true));
             Config.AddItem(new MenuItem("pots", "使用 pots").SetValue(true));
             Config.AddItem(new MenuItem("Hit", "W 命中率").SetValue(new Slider(2, 2, 0)));
-            Config.AddItem(new MenuItem("debug", "Debug").SetValue(false));
+            Config.AddItem(new MenuItem("debug", "调试").SetValue(false));
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnGameUpdate += Game_OnGameUpdate;

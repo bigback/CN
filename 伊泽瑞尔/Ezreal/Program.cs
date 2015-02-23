@@ -77,6 +77,8 @@ namespace Ezreal
             SpellList.Add(R1);
             //Create the menu
             Config = new Menu(ChampionName, ChampionName, true);
+			Config = new Menu("伊泽瑞尔", "Ezreal", true);
+			
 
             var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
@@ -111,7 +113,7 @@ namespace Ezreal
             Orbwalking.AfterAttack += afterAttack;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
-            Game.PrintChat("<font color=\"#008aff\">E</font>zreal full automatic AI ver 1.9 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">宸茶浇鍏</font>");
+            Game.PrintChat("<font color=\"#008aff\">浼婃辰鐟炲皵鍏ㄨ嚜鍔ˋI 鐗堟湰 :</font>1.9 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">鍔犺浇鎴愬姛</font>");
         }
 
         public static void farmQ()

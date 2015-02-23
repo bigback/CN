@@ -16,13 +16,13 @@ namespace JunglePosition
 
         private static void Game_OnGameLoad(EventArgs args)
         {
-            Config = new Menu("花边汉化-无伤打野提示", "JunglePosition", true);
+            Config = new Menu("无伤打野提示", "JunglePosition", true);
             Config.AddItem(new MenuItem("Show", "显示 位置").SetValue(new Circle(true, Color.GreenYellow)));
             Config.AddToMainMenu();
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.PrintChat(
-                "<font color='#70DBDB'>xQx | </font><font color='#FFFFFF'>Jungle Position (4.20)-Loaded!</font> <font color='#70DBDB'> 花边汉化-无伤打野提示 加载成功!</font>");
+                "<font color='#70DBDB'>xQx | </font><font color='#FFFFFF'>Jungle Position (4.20)-Loaded!</font> <font color='#70DBDB'> 鏃犱激鎵撻噹鎻愮ず 鍔犺浇鎴愬姛!!</font>");
         }
 
         private static void Drawing_OnDraw(EventArgs args)

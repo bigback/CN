@@ -90,7 +90,7 @@ The idea where the lines come from is that u can calculate how far they are from
 
             var NotificationsMenu = Menu.AddSubMenu(new Menu("通知", "Notifications"));
 
-            NotificationsMenu.AddItem(new MenuItem("notifRecFinished", "回城结束").SetValue(true));
+            NotificationsMenu.AddItem(new MenuItem("notifRecFinished", "回城完成").SetValue(true));
             NotificationsMenu.AddItem(new MenuItem("notifRecAborted", "回城中止").SetValue(true));
 
             EnemySpawnPos = ObjectManager.Get<Obj_SpawnPoint>().FirstOrDefault(x => x.IsEnemy).Position; //ObjectManager.Get<GameObject>().FirstOrDefault(x => x.Type == GameObjectType.obj_SpawnPoint && x.IsEnemy).Position;
@@ -111,7 +111,7 @@ The idea where the lines come from is that u can calculate how far they are from
             if (compatibleChamp)
                 Game.OnGameUpdate += Game_OnGameUpdate;
 
-            ShowNotification("娉夋按澶ф嫑3 by Beaving - 宸茶浇鍏", NotificationColor, 3000);
+            ShowNotification("泉水大招3 by Beaving - 加载成功", NotificationColor, 3000);
         }
 
         public Notification ShowNotification(string message, System.Drawing.Color color, int duration = -1, bool dispose = true)
