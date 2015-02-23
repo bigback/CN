@@ -40,7 +40,7 @@ namespace Ezreal
         public static Items.Item Potion = new Items.Item(2003, 0);
         public static Items.Item ManaPotion = new Items.Item(2004, 0);
         public static Items.Item Youmuu = new Items.Item(3142, 0);
-
+        public static int Muramana = 3042;
         //Menu
         public static Menu Config;
 
@@ -78,7 +78,6 @@ namespace Ezreal
             //Create the menu
             Config = new Menu(ChampionName, ChampionName, true);
 			Config = new Menu("伊泽瑞尔", "Ezreal", true);
-			
 
             var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
@@ -90,7 +89,7 @@ namespace Ezreal
             //Load the orbwalker and add it to the submenu.
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
             Config.AddToMainMenu();
-            Config.AddItem(new MenuItem("noti", "显示通知").SetValue(true));
+Config.AddItem(new MenuItem("noti", "显示通知").SetValue(true));
             Config.AddItem(new MenuItem("pots", "使用pots").SetValue(true));
             Config.AddItem(new MenuItem("farmQ", "Q补兵").SetValue(true));
             Config.AddItem(new MenuItem("autoE", "自动E").SetValue(true));
@@ -105,7 +104,7 @@ namespace Ezreal
                 Config.SubMenu("R 设置").AddItem(new MenuItem("hitchanceR", "R 高命中率").SetValue(true));
                 Config.SubMenu("R 设置").AddItem(new MenuItem("useR", "半自动使用R按键").SetValue(new KeyBind('t', KeyBindType.Press))); //32 == space
             #endregion
-            Config.AddItem(new MenuItem("debug", "Debug").SetValue(false));
+            Config.AddItem(new MenuItem("debug", "调试").SetValue(false));
             //Add the events we are going to use:
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnGameUpdate += Game_OnGameUpdate;
@@ -113,7 +112,7 @@ namespace Ezreal
             Orbwalking.AfterAttack += afterAttack;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
-            Game.PrintChat("<font color=\"#008aff\">浼婃辰鐟炲皵鍏ㄨ嚜鍔ˋI 鐗堟湰 :</font>1.9 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">鍔犺浇鎴愬姛</font>");
+            Game.PrintChat("<font color=\"#008aff\">浼婃辰鐟炲皵鍏ㄨ嚜鍔ˋI 鐗堟湰 : ver 2.0 <font color=\"#000000\">by sebastiank1</font> - <font color=\"#00BFFF\">鍔犺浇鎴愬姛</font>");
         }
 
         public static void farmQ()
@@ -175,11 +174,15 @@ namespace Ezreal
                 {
                     E.Cast(ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range), true);
                 }
+                
             }
             else
             {
                 Esmart = false;
             }
+
+
+
             if (Orbwalker.ActiveMode.ToString() == "Combo" && E.IsReady() && Config.Item("autoE").GetValue<bool>())
             {
                 ManaMenager();
@@ -187,13 +190,13 @@ namespace Ezreal
                 var t = TargetSelector.GetTarget( 1400, TargetSelector.DamageType.Physical);
 
                 if (E.IsReady() && ObjectManager.Player.Mana > RMANA + EMANA 
-                    && ObjectManager.Player.CountEnemiesInRange(270) > 0 
+                    && ObjectManager.Player.CountEnemiesInRange(260) > 0 
                     && ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range).CountEnemiesInRange(500) < 3
                     && t.Position.Distance(Game.CursorPos)  > t.Position.Distance(ObjectManager.Player.Position))
                     E.Cast(ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range), true);
                 else if (ObjectManager.Player.Health > ObjectManager.Player.MaxHealth * 0.4 
                     && !ObjectManager.Player.UnderTurret(true) 
-                    && (Game.Time - OverKill > 0.6)
+                    && (Game.Time - OverKill > 0.4)
                     
                      && ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range).CountEnemiesInRange(700) < 3)
                 {
@@ -219,12 +222,36 @@ namespace Ezreal
                         debug("E kill aa");
                         OverKill = Game.Time;
                     }
+                    else if (t.IsValidTarget()
+                     && ObjectManager.Player.Mana > QMANA + EMANA + WMANA
+                     && t.Position.Distance(Game.CursorPos) + 300 < t.Position.Distance(ObjectManager.Player.Position)
+                     && W.IsReady()
+                     && W.GetDamage(t) + E.GetDamage(t) > t.Health
+                     && !Orbwalking.InAutoAttackRange(t)
+                     && Q.WillHit(ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range), Q.GetPrediction(t).UnitPosition)
+                         )
+                    {
+                        E.Cast(ObjectManager.Player.Position.Extend(Game.CursorPos, E.Range), true);
+                        debug("E kill W");
+                    }
                 }
             }
 
             if (Q.IsReady())
             {
+                //Q.Cast(ObjectManager.Player);
                 ManaMenager();
+                if (Config.Item("mura").GetValue<bool>())
+                {
+                    int Mur = Items.HasItem(Muramana) ? 3042 : 3043;
+                    if (Orbwalker.ActiveMode.ToString() == "Combo" && Items.HasItem(Mur) && Items.CanUseItem(Mur) && ObjectManager.Player.Mana > RMANA + EMANA + QMANA + WMANA)
+                    {
+                        if (!ObjectManager.Player.HasBuff("Muramana"))
+                            Items.UseItem(Mur);
+                    }
+                    else if (ObjectManager.Player.HasBuff("Muramana") && Items.HasItem(Mur) && Items.CanUseItem(Mur))
+                        Items.UseItem(Mur);
+                }
                 bool cast = false;
                 bool wait = false;
                 foreach (var target in ObjectManager.Get<Obj_AI_Hero>())
@@ -308,6 +335,7 @@ namespace Ezreal
             }
             if (W.IsReady() && attackNow)
             {
+                //W.Cast(ObjectManager.Player);
                 ManaMenager();
                 var t = TargetSelector.GetTarget(W.Range, TargetSelector.DamageType.Physical);
                 if (t.IsValidTarget())
@@ -343,7 +371,7 @@ namespace Ezreal
             }
             PotionMenager();
            
-            if (R.IsReady() && Config.Item("autoR").GetValue<bool>() && ObjectManager.Player.CountEnemiesInRange(800) == 0 && (Game.Time - OverKill > 0.6))
+            if (R.IsReady() && Config.Item("autoR").GetValue<bool>() && ObjectManager.Player.CountEnemiesInRange(750) == 0 && (Game.Time - OverKill > 0.6))
             {
                 foreach (var target in ObjectManager.Get<Obj_AI_Hero>())
                 {
@@ -470,8 +498,18 @@ namespace Ezreal
 
         static void BeforeAttack(Orbwalking.BeforeAttackEventArgs args)
         {
-
             attackNow = false;
+            if (Config.Item("mura").GetValue<bool>())
+            {
+                int Mur = Items.HasItem(Muramana) ? 3042 : 3043;
+                if (args.Target.IsEnemy && args.Target.IsValid<Obj_AI_Hero>() && Items.HasItem(Mur) && Items.CanUseItem(Mur) && ObjectManager.Player.Mana > RMANA + EMANA + QMANA + WMANA)
+                {
+                    if (!ObjectManager.Player.HasBuff("Muramana"))
+                        Items.UseItem(Mur);
+                }
+                else if (ObjectManager.Player.HasBuff("Muramana") && Items.HasItem(Mur) && Items.CanUseItem(Mur))
+                    Items.UseItem(Mur);
+            }
         }
 
         private static void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
@@ -521,7 +559,7 @@ namespace Ezreal
                             debug("W ks OPS");
                         }
                     }
-                    if (!Orbwalking.InAutoAttackRange(target) && target.IsValidTarget(R.Range) && R.IsReady() && ObjectManager.Player.CountEnemiesInRange(800) == 0)
+                    if (!Orbwalking.InAutoAttackRange(target) && target.IsValidTarget(R.Range) && R.IsReady() && ObjectManager.Player.CountEnemiesInRange(700) == 0)
                     {
                         double rDmg = getRdmg(target);
                         if (rDmg > HpLeft && HpLeft > 0  && target.CountAlliesInRange(500) == 0)
