@@ -103,6 +103,13 @@ namespace Kalista
             ProcessLink("drawRangeEsmall", subMenu.AddLinkedCircle("E 范围 ", false, Color.FromArgb(150, Color.DarkRed), SpellManager.E.Range - 200));
             ProcessLink("drawRangeEactual", subMenu.AddLinkedCircle("E 范围 (真实)", true, Color.FromArgb(150, Color.DarkRed), SpellManager.E.Range));
             ProcessLink("drawRangeR", subMenu.AddLinkedCircle("R 范围", false, Color.FromArgb(150, Color.Red), SpellManager.R.Range));
+			
+			// Hanhua
+			subMenu = _menu.MainMenu.AddSubMenu("后爸爸汉化");
+			subMenu = _menu.MainMenu.AddSubMenu("源地址：github.com/81199000/CN");
+			subMenu = _menu.MainMenu.AddSubMenu("更新日志:bigback.m");
+
+		  
         }
     }
 }
