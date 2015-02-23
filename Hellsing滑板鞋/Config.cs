@@ -106,7 +106,7 @@ namespace Kalista
 			
 			// Hanhua
 			subMenu = _menu.MainMenu.AddSubMenu("后爸爸汉化");
-			subMenu = _menu.MainMenu.AddSubMenu("源地址：github.com/81199000/CN");
+			subMenu = _menu.MainMenu.AddSubMenu("源地址：https://github.com/bigback/CN");
 			subMenu = _menu.MainMenu.AddSubMenu("更新日志:bigback.m");
 
 		  
