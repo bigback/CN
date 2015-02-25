@@ -599,7 +599,7 @@ namespace DevCassio
 
                 InitializeAttachEvents();
 
-                Game.PrintChat(string.Format("<font color='#fb762d'>{0} Loaded v{1}</font>", Assembly.GetExecutingAssembly().GetName().Name, Assembly.GetExecutingAssembly().GetName().Version));
+                Game.PrintChat(string.Format("<font color='#fb762d'>{0} 鍔犺浇鎴愬姛 v{1}</font>", Assembly.GetExecutingAssembly().GetName().Name, Assembly.GetExecutingAssembly().GetName().Version));
 
                 assemblyUtil = new AssemblyUtil(Assembly.GetExecutingAssembly().GetName().Name);
                 assemblyUtil.onGetVersionCompleted += AssemblyUtil_onGetVersionCompleted;
@@ -617,9 +617,9 @@ namespace DevCassio
         static void AssemblyUtil_onGetVersionCompleted(OnGetVersionCompletedArgs args)
         {
             if (args.LastAssemblyVersion == Assembly.GetExecutingAssembly().GetName().Version.ToString())
-                Game.PrintChat(string.Format("<font color='#fb762d'>Dev铔囧コ 鏄渶鏂扮増鏈副.</font>"));
+                Game.PrintChat(string.Format("<font color='#fb762d'>DevCassio You have the latest version.</font>"));
             else
-                Game.PrintChat(string.Format("<font color='#fb762d'>Dev铔囧コ 鏈夋柊鐗堟湰锛佽閫氱煡鐒＄偤杩涜鏇存柊! {0}</font>", args.LastAssemblyVersion));
+                Game.PrintChat(string.Format("<font color='#fb762d'>DevCassio NEW VERSION available! Tap F8 for Update! {0}</font>", args.LastAssemblyVersion));
         }
 
         private static void InitializeAttachEvents()
@@ -837,7 +837,7 @@ namespace DevCassio
             if (mustDebug)
                 Game.PrintChat("InitializeMainMenu Start");
 
-            Config = new Menu("【無為汉化】Dev蛇女", "DevCassio", true);
+            Config = new Menu("Dev蛇女---后爸爸汉化", "DevCassio", true);
 
             var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
             TargetSelector.AddToMenu(targetSelectorMenu);
@@ -846,14 +846,14 @@ namespace DevCassio
             Config.AddSubMenu(new Menu("走砍", "Orbwalking"));
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
 
-            Config.AddSubMenu(new Menu("极限", "Ultimate"));
-            Config.SubMenu("Ultimate").AddItem(new MenuItem("UseAssistedUlt", "使用辅助大招").SetValue(true));
-            Config.SubMenu("Ultimate").AddItem(new MenuItem("AssistedUltKey", "辅助大招按键").SetValue((new KeyBind("R".ToCharArray()[0], KeyBindType.Press))));
+            Config.AddSubMenu(new Menu("大招设置", "Ultimate"));
+            Config.SubMenu("Ultimate").AddItem(new MenuItem("UseAssistedUlt", "使用智能大招").SetValue(true));
+            Config.SubMenu("Ultimate").AddItem(new MenuItem("AssistedUltKey", "智能大招按键").SetValue((new KeyBind("R".ToCharArray()[0], KeyBindType.Press))));
             Config.SubMenu("Ultimate").AddItem(new MenuItem("BlockUlt", "防止空大").SetValue(true));
-            Config.SubMenu("Ultimate").AddItem(new MenuItem("UseUltUnderTower", "敌人在塔下使用R").SetValue(true));
+            Config.SubMenu("Ultimate").AddItem(new MenuItem("UseUltUnderTower", "自动大塔下敌人").SetValue(true));
             Config.SubMenu("Ultimate").AddItem(new MenuItem("UltRange", "极限范围").SetValue(new Slider(650, 0, 800)));
-            Config.SubMenu("Ultimate").AddItem(new MenuItem("RMinHit", "最少击中敌人").SetValue(new Slider(2, 1, 5)));
-            Config.SubMenu("Ultimate").AddItem(new MenuItem("RMinHitFacing", "最少击中正面敌人").SetValue(new Slider(1, 1, 5)));
+            Config.SubMenu("Ultimate").AddItem(new MenuItem("RMinHit", "最少命中敌人数").SetValue(new Slider(2, 1, 5)));
+            Config.SubMenu("Ultimate").AddItem(new MenuItem("RMinHitFacing", "最少石化敌人数").SetValue(new Slider(1, 1, 5)));
 
             Config.AddSubMenu(new Menu("连招", "Combo"));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseQCombo", "使用 Q").SetValue(true));
@@ -861,12 +861,12 @@ namespace DevCassio
             Config.SubMenu("Combo").AddItem(new MenuItem("UseECombo", "使用 E").SetValue(true));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseRCombo", "使用 R").SetValue(true));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseIgnite", "使用点燃").SetValue(true));
-            Config.SubMenu("Combo").AddItem(new MenuItem("UseAACombo", "使用 AA").SetValue(true));
-            Config.SubMenu("Combo").AddItem(new MenuItem("UseRSaveYourself", "使用R救命").SetValue(true));
-            Config.SubMenu("Combo").AddItem(new MenuItem("UseRSaveYourselfMinHealth", "保留够法力值使用R").SetValue(new Slider(25, 0, 100)));
+            Config.SubMenu("Combo").AddItem(new MenuItem("UseAACombo", "连招使用AA").SetValue(true));
+            Config.SubMenu("Combo").AddItem(new MenuItem("UseRSaveYourself", "使用大招保命").SetValue(true));
+            Config.SubMenu("Combo").AddItem(new MenuItem("UseRSaveYourselfMinHealth", "使用大招保命最低血量").SetValue(new Slider(25, 0, 100)));
 
-            Config.AddSubMenu(new Menu("骚扰", "Harass"));
-            Config.SubMenu("Harass").AddItem(new MenuItem("HarassToggle", "骚扰 (切换)").SetValue(new KeyBind("G".ToCharArray()[0], KeyBindType.Toggle)));
+            Config.AddSubMenu(new Menu("消耗", "Harass"));
+            Config.SubMenu("Harass").AddItem(new MenuItem("HarassToggle", "消耗开关 (切换)").SetValue(new KeyBind("G".ToCharArray()[0], KeyBindType.Toggle)));
             Config.SubMenu("Harass").AddItem(new MenuItem("UseQHarass", "使用 Q").SetValue(true));
             Config.SubMenu("Harass").AddItem(new MenuItem("UseWHarass", "使用 W").SetValue(false));
             Config.SubMenu("Harass").AddItem(new MenuItem("UseEHarass", "使用 E").SetValue(true));
@@ -874,39 +874,37 @@ namespace DevCassio
             Config.AddSubMenu(new Menu("补兵", "Freeze"));
             Config.SubMenu("Freeze").AddItem(new MenuItem("UseEFreeze", "使用 E").SetValue(true));
 
-            Config.AddSubMenu(new Menu("清兵", "LaneClear"));
+            Config.AddSubMenu(new Menu("LaneClear", "LaneClear"));
             Config.SubMenu("LaneClear").AddItem(new MenuItem("UseQLaneClear", "使用 Q").SetValue(true));
             Config.SubMenu("LaneClear").AddItem(new MenuItem("UseWLaneClear", "使用 W").SetValue(false));
             Config.SubMenu("LaneClear").AddItem(new MenuItem("UseELaneClear", "使用 E").SetValue(true));
-            Config.SubMenu("LaneClear").AddItem(new MenuItem("UseELastHitLaneClear", "只有补刀使用E ").SetValue(true));
-            Config.SubMenu("LaneClear").AddItem(new MenuItem("UseELastHitLaneClearNonPoisoned", "使用E补刀(没中毒)").SetValue(false));
-            Config.SubMenu("LaneClear").AddItem(new MenuItem("LaneClearMinMana", "保留法力").SetValue(new Slider(25, 0, 100)));
+            Config.SubMenu("LaneClear").AddItem(new MenuItem("UseELastHitLaneClear", "只用E补刀").SetValue(true));
+            Config.SubMenu("LaneClear").AddItem(new MenuItem("UseELastHitLaneClearNonPoisoned", "使用E补未中毒兵").SetValue(false));
+            Config.SubMenu("LaneClear").AddItem(new MenuItem("LaneClearMinMana", "自动清线最低蓝量").SetValue(new Slider(25, 0, 100)));
 
             Config.AddSubMenu(new Menu("清野", "JungleClear"));
             Config.SubMenu("JungleClear").AddItem(new MenuItem("UseQJungleClear", "使用 Q").SetValue(true));
             Config.SubMenu("JungleClear").AddItem(new MenuItem("UseEJungleClear", "使用 E").SetValue(true));
 
-            Config.AddSubMenu(new Menu("防突", "Gapcloser"));
-            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RAntiGapcloser", "R 防突进").SetValue(true));
-            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RInterrupetSpell", "R 打断法术").SetValue(true));
-            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RAntiGapcloserMinHealth", "保留法力").SetValue(new Slider(60, 0, 100)));
+            Config.AddSubMenu(new Menu("反突进", "Gapcloser"));
+            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RAntiGapcloser", "R 反突进").SetValue(true));
+            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RInterrupetSpell", "R 打断技能").SetValue(true));
+            Config.SubMenu("Gapcloser").AddItem(new MenuItem("RAntiGapcloserMinHealth", "R 反突进最低血量").SetValue(new Slider(60, 0, 100)));
 
-            Config.AddSubMenu(new Menu("杂项", "Misc"));
-            Config.SubMenu("Misc").AddItem(new MenuItem("PacketCast", "使用封包反向E").SetValue(true));
+            Config.AddSubMenu(new Menu("其他", "Misc"));
+            Config.SubMenu("Misc").AddItem(new MenuItem("PacketCast", "反向E (封包)").SetValue(true));
 
-            Config.AddSubMenu(new Menu("机关枪扫射∶)", "Legit"));
-            Config.SubMenu("Legit").AddItem(new MenuItem("PlayLegit", "启用机关枪扫射∶").SetValue(false));
+            Config.AddSubMenu(new Menu("就是干 :)", "Legit"));
+            Config.SubMenu("Legit").AddItem(new MenuItem("PlayLegit", "玩真的了 :)").SetValue(false));
             Config.SubMenu("Legit").AddItem(new MenuItem("DisableNFE", "禁用反向E").SetValue(true));
-            Config.SubMenu("Legit").AddItem(new MenuItem("LegitCastDelay", "设置 E 延迟").SetValue(new Slider(1000, 0, 2000)));
+            Config.SubMenu("Legit").AddItem(new MenuItem("LegitCastDelay", "设置E延迟").SetValue(new Slider(1000, 0, 2000)));
 
-            Config.AddSubMenu(new Menu("范围", "Drawings"));
+            Config.AddSubMenu(new Menu("显示", "Drawings"));
             Config.SubMenu("Drawings").AddItem(new MenuItem("QRange", "Q 范围").SetValue(new Circle(true, System.Drawing.Color.FromArgb(255, 255, 255, 255))));
             Config.SubMenu("Drawings").AddItem(new MenuItem("WRange", "W 范围").SetValue(new Circle(false, System.Drawing.Color.FromArgb(255, 255, 255, 255))));
             Config.SubMenu("Drawings").AddItem(new MenuItem("ERange", "E 范围").SetValue(new Circle(false, System.Drawing.Color.FromArgb(255, 255, 255, 255))));
             Config.SubMenu("Drawings").AddItem(new MenuItem("RRange", "R 范围").SetValue(new Circle(false, System.Drawing.Color.FromArgb(255, 255, 255, 255))));
-            Config.SubMenu("Drawings").AddItem(new MenuItem("EDamage", "显示E伤损").SetValue(true));
-						Config.AddSubMenu(new Menu("無為汉化", "by wuwei"));
-				Config.SubMenu("by wuwei").AddItem(new MenuItem("qunhao", "L#汉化群：386289593"));
+            Config.SubMenu("Drawings").AddItem(new MenuItem("EDamage", "在血条上显示E伤害").SetValue(true));
 
             skinManager.AddToMenu(ref Config);
 
