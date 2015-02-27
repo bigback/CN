@@ -39,7 +39,7 @@ namespace Kalista
                                 {
                                     Utility.DelayAction.Add(5000, () =>
                                     {
-                                        Game.PrintChat("[{0}] 妫€娴嬪埌鏂扮増鏈 : {1} => {2}!",
+                                        Game.PrintChat("[{0}] Update available: {1} => {2}!",
                                             assemblyName.Name,
                                             assemblyName.Version,
                                             serverVersion);

@@ -9,7 +9,7 @@ namespace Kalista
     public class Config
     {
         private static bool initialized = false;
-        private const string MENU_TITLE = "[Hellsing滑板鞋] " + Program.CHAMP_NAME ;
+        private const string MENU_TITLE = "[Hellsing滑板鞋] " + Program.CHAMP_NAME;
 
         private static MenuWrapper _menu;
 
@@ -46,7 +46,7 @@ namespace Kalista
             var subMenu = _menu.MainMenu.AddSubMenu("连招");
             ProcessLink("comboUseQ", subMenu.AddLinkedBool("使用 Q"));
             ProcessLink("comboUseE", subMenu.AddLinkedBool("使用 E"));
-            ProcessLink("comboNumE", subMenu.AddLinkedSlider("叠E层数", 5, 1, 20));
+            ProcessLink("comboNumE", subMenu.AddLinkedSlider("叠E层", 5, 1, 20));
             ProcessLink("comboUseItems", subMenu.AddLinkedBool("使用物品"));
             ProcessLink("comboUseIgnite", subMenu.AddLinkedBool("使用点燃"));
             ProcessLink("comboActive", subMenu.AddLinkedKeyBind("连招按键", 32, KeyBindType.Press));
@@ -100,16 +100,14 @@ namespace Kalista
             ProcessLink("drawDamageE", subMenu.AddLinkedCircle("在血条上显示E伤害", true, Color.FromArgb(150, Color.Green), 0));
             ProcessLink("drawRangeQ", subMenu.AddLinkedCircle("Q 范围", true, Color.FromArgb(150, Color.IndianRed), SpellManager.Q.Range));
             ProcessLink("drawRangeW", subMenu.AddLinkedCircle("W 范围", true, Color.FromArgb(150, Color.MediumPurple), SpellManager.W.Range));
-            ProcessLink("drawRangeEsmall", subMenu.AddLinkedCircle("E 范围 ", false, Color.FromArgb(150, Color.DarkRed), SpellManager.E.Range - 200));
+            ProcessLink("drawRangeEsmall", subMenu.AddLinkedCircle("E 范围 (leaving)", false, Color.FromArgb(150, Color.DarkRed), SpellManager.E.Range - 200));
             ProcessLink("drawRangeEactual", subMenu.AddLinkedCircle("E 范围 (真实)", true, Color.FromArgb(150, Color.DarkRed), SpellManager.E.Range));
             ProcessLink("drawRangeR", subMenu.AddLinkedCircle("R 范围", false, Color.FromArgb(150, Color.Red), SpellManager.R.Range));
 			
 			// Hanhua
 			subMenu = _menu.MainMenu.AddSubMenu("后爸爸汉化");
 			subMenu = _menu.MainMenu.AddSubMenu("源地址：https://github.com/bigback/CN");
-			subMenu = _menu.MainMenu.AddSubMenu("更新日志:bigback.m");
-
-		  
+			subMenu = _menu.MainMenu.AddSubMenu("更新日志:bigback.me");
         }
     }
 }
